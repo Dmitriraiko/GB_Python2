@@ -18,10 +18,11 @@ def create_file(namef,dir,size):
             token = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(size1))
         else:
             token = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(int(size)))
+           
+            file = open(dir+name,"w")
+            file.write(token)
 
             
-file = open(dir+name,"w")
-file.write(token)
 create_file("/test1.txt","E:",'10KB')
 create_file("/test2.txt","E:",'1024')
 create_file("/test11.txt","E:",'2MB')
