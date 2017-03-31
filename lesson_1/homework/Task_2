@@ -1,0 +1,38 @@
+import hashlib
+
+
+def get_hash(x):
+    '''
+    Функция вычисления хэша по названию
+    '''
+    if x[1] == 'sha1':
+        h = hashlib.sha1()
+    elif x[1] == 'md5':
+        h = hashlib.md5()
+    else:
+        h = hashlib.sha512()
+    h.update(x[0].encode('cp1251'))
+    return h.hexdigest()
+
+
+def list_len(x):        #Примитивная проверка длины списка с результатом
+    assert len(x) == 3
+
+
+if __name__ = '__main__':
+    
+    f = open('need_hashes.txt','r')
+    lines = f.readlines()
+    f.close()
+    #Стираем содержимое файла для записи готового результата
+    f = open('need_hashes.txt','w')
+    f.close()
+    
+    for line in lines:
+        st = list(line.split(';'))
+        list_len(st)
+        st[2] = get_hash(st)
+        f = open('need_hashes.txt','a')
+        newline = ';'.join(st)
+        f.write(newline + '\n')
+    f.close()
